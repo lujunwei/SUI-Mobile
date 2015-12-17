@@ -1,7 +1,5 @@
 + function($) {
     'use strict';
-
-
     $.initPullToRefresh = function(pageContainer) {
         var eventsTarget = $(pageContainer);
         if (!eventsTarget.hasClass('pull-to-refresh-content')) {
@@ -142,6 +140,7 @@
 
     };
     $.pullToRefreshDone = function(container) {
+        $(window).scrollTop(0);//解决微信下拉刷新顶部消失的问题
         container = $(container);
         if (container.length === 0) container = $('.pull-to-refresh-content.refreshing');
         container.removeClass('refreshing').addClass('transitioning');
@@ -167,7 +166,6 @@
         if (pullToRefreshContent.length === 0) return;
         if (pullToRefreshContent[0].destroyPullToRefresh) pullToRefreshContent[0].destroyPullToRefresh();
     };
-
 
     //这里是否需要写到 scroller 中去？
 /*    $.initPullToRefresh = function(pageContainer) {

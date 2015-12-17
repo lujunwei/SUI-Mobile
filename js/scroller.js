@@ -70,6 +70,8 @@
             var options = {
                 probeType: 1,
                 mouseWheel: true,
+                //解决安卓js模式下，刷新滚动条后绑定的事件不响应
+                click:true
             };
             if (ptr) {
                 options.ptr = true;
@@ -87,8 +89,8 @@
             //如果页面本身已经进行了原生滚动，那么把这个滚动换成JS的滚动
             var nativeScrollTop = this.$pageContent[0].scrollTop;
             if(nativeScrollTop) {
-              this.$pageContent[0].scrollTop = 0;
-              this.scrollTop(nativeScrollTop);
+                this.$pageContent[0].scrollTop = 0;
+                this.scrollTop(nativeScrollTop);
             }
         } else {
             $pageContent.addClass('native-scroll');
@@ -183,7 +185,6 @@
 
         this.each(function() {
 
-
             var $this = $(this);
 
             var options = $.extend({}, $this.dataset(), typeof option === 'object' && option);
@@ -198,7 +199,7 @@
             if (typeof option === 'string' && typeof data[option] === 'function') {
                 internal_return = data[option].apply(data, args);
                 if (internal_return !== undefined)
-                    return false;
+            return false;
             }
 
         });
@@ -234,7 +235,7 @@
             $(content).scroller('refresh');
         } else {
             $('.javascript-scroll').each(function() {
-              $(this).scroller('refresh');
+                $(this).scroller('refresh');
             });
         }
 
